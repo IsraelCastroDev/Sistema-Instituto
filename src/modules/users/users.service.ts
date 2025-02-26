@@ -1,11 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { hashPassword } from 'src/common/helpers/user';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
+
+  async create(createUserDto: CreateUserDto) {
+    const userExists = await this.userRepository.findOneBy({
+      dni: createUserDto.dni,
+    });
+
+    if (userExists) {
+      throw new ConflictException({ message: 'Usuario ya registrado' });
+    }
+
+    const user = this.userRepository.create(createUserDto);
+    const passwordHashed = await hashPassword(user.password);
+    user.password = passwordHashed;
+    await this.userRepository.save(user);
+
+    return { message: 'Usuario creado exitosamente' };
   }
 
   findAll() {
