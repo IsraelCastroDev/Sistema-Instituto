@@ -17,24 +17,42 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const userExists = await this.userRepository.findOneBy({
-      dni: createUserDto.dni,
-    });
+    try {
+      const userExists = await this.userRepository.findOneBy({
+        dni: createUserDto.dni,
+      });
 
-    if (userExists) {
-      throw new ConflictException({ message: 'Usuario ya registrado' });
+      if (userExists) {
+        throw new ConflictException({ message: 'Usuario ya registrado' });
+      }
+
+      const passwordHashed = await hashPassword(createUserDto.password);
+
+      const user = this.userRepository.create({
+        ...createUserDto,
+        password: passwordHashed,
+      });
+      await this.userRepository.save(user);
+
+      return { message: 'Usuario creado exitosamente' };
+    } catch (error) {
+      console.error(error);
+      throw new ConflictException({ message: 'Error al crear usuario' });
     }
-
-    const user = this.userRepository.create(createUserDto);
-    const passwordHashed = await hashPassword(user.password);
-    user.password = passwordHashed;
-    await this.userRepository.save(user);
-
-    return { message: 'Usuario creado exitosamente' };
   }
 
   findAll() {
     return `This action returns all users`;
+  }
+
+  async findUserByDni(dni: string) {
+    const user = await this.userRepository.findOneBy({ dni });
+
+    if (!user) {
+      throw new UnauthorizedException({ message: 'Usuario no encontrado' });
+    }
+
+    return user;
   }
 
   findOne(id: number) {
