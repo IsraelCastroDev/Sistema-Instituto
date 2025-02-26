@@ -20,14 +20,16 @@ export class CreateUserDto {
 
   @IsNotEmpty({ message: 'El DNI es requerido' })
   @Matches(/^[0-9]{8}$/, {
-    message: 'El DNI debe tener 8 números y una letra mayúscula',
+    message: 'El DNI debe tener 8 números',
   })
   dni: string;
 
+  @IsOptional()
   @IsNotEmpty({ message: 'El teléfono es requerido' })
   @Matches(/^[0-9]{9}$/, { message: 'El teléfono debe tener 9 números' })
   phone: string;
 
+  @IsOptional()
   @IsNotEmpty({ message: 'El correo electrónico es requerido' })
   @IsEmail({}, { message: 'El correo electrónico debe ser válido' })
   email: string;
