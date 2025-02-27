@@ -8,7 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfig } from './config/typeOrmConfig';
 import { CoursesModule } from './modules/courses/courses.module';
 import { CampusModule } from './modules/campus/campus.module';
-import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 
 @Module({
   imports: [
