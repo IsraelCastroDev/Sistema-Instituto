@@ -1,5 +1,7 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Course } from 'src/modules/courses/entities/course.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('academicsCicles')
 export class AcademicCycle {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,4 +20,7 @@ export class AcademicCycle {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @OneToMany(() => Course, (course) => course.academicCycle)
+  courses: Course[];
 }

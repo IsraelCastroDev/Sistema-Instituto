@@ -1,3 +1,4 @@
+import { AcademicCycle } from 'src/modules/academic-cycles/entities/academic-cycle.entity';
 import { Campus } from 'src/modules/campus/entities/campus.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
@@ -27,4 +28,10 @@ export class Course {
 
   @Column({ type: 'integer' })
   campusId: number;
+
+  @ManyToOne(() => AcademicCycle)
+  academicCycle: AcademicCycle;
+
+  @Column({ type: 'integer' })
+  academicCycleId: number;
 }
