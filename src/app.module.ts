@@ -12,6 +12,7 @@ import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 import { EnrollmentsCoursesModule } from './enrollments-courses/enrollments-courses.module';
 import { CareersModule } from './careers/careers.module';
 import { CareersLevelsModule } from './careers-levels/careers-levels.module';
+import { AcademicCyclesModule } from './academic-cycles/academic-cycles.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { CareersLevelsModule } from './careers-levels/careers-levels.module';
     EnrollmentsCoursesModule,
     CareersModule,
     CareersLevelsModule,
+    AcademicCyclesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
