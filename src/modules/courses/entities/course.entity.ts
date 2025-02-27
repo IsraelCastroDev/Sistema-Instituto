@@ -1,3 +1,4 @@
+import { Campus } from 'src/modules/campus/entities/campus.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -14,4 +15,10 @@ export class Course {
 
   @Column({ type: 'integer' })
   userId: number;
+
+  @ManyToOne(() => Campus)
+  campus: Campus;
+
+  @Column({ type: 'integer' })
+  campusId: number;
 }
