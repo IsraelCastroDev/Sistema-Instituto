@@ -11,6 +11,7 @@ import { CareersService } from './careers.service';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
 import { IdValidationPipe } from 'src/common/pipes/id-validation/id-validation.pipe';
+import { UpdateStatusCareerDto } from './dto/update-status-career.dto';
 
 @Controller('careers')
 export class CareersController {
@@ -33,14 +34,22 @@ export class CareersController {
 
   @Patch(':id')
   update(
-    @Param('id', IdValidationPipe) id: string,
+    @Param('id', IdValidationPipe) id: number,
     @Body() updateCareerDto: UpdateCareerDto,
   ) {
-    return this.careersService.update(+id, updateCareerDto);
+    return this.careersService.update(id, updateCareerDto);
+  }
+
+  @Patch('update-status/:id')
+  updateStatus(
+    @Param('id', IdValidationPipe) id: number,
+    @Body() updateStatusCareerDto: UpdateStatusCareerDto,
+  ) {
+    return this.careersService.updateStatus(id, updateStatusCareerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', IdValidationPipe) id: string) {
-    return this.careersService.remove(+id);
+  remove(@Param('id', IdValidationPipe) id: number) {
+    return this.careersService.remove(id);
   }
 }
