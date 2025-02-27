@@ -9,6 +9,7 @@ import { typeOrmConfig } from './config/typeOrmConfig';
 import { CoursesModule } from './modules/courses/courses.module';
 import { CampusModule } from './modules/campus/campus.module';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
+import { EnrollmentsCoursesModule } from './enrollments-courses/enrollments-courses.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
     CoursesModule,
     CampusModule,
     EnrollmentsModule,
+    EnrollmentsCoursesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
