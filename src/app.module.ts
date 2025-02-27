@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfig } from './config/typeOrmConfig';
+import { CoursesModule } from './modules/courses/courses.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { typeOrmConfig } from './config/typeOrmConfig';
     }),
     UsersModule,
     AuthModule,
+    CoursesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
