@@ -11,6 +11,7 @@ import { CampusModule } from './modules/campus/campus.module';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
 import { EnrollmentsCoursesModule } from './enrollments-courses/enrollments-courses.module';
 import { CareersModule } from './careers/careers.module';
+import { CareersLevelsModule } from './careers-levels/careers-levels.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CareersModule } from './careers/careers.module';
     EnrollmentsModule,
     EnrollmentsCoursesModule,
     CareersModule,
+    CareersLevelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
