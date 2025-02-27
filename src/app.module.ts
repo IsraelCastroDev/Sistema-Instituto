@@ -14,6 +14,7 @@ import { CareersModule } from './careers/careers.module';
 import { CareersLevelsModule } from './careers-levels/careers-levels.module';
 import { AcademicCyclesModule } from './academic-cycles/academic-cycles.module';
 import { CareersEnrollmentsModule } from './careers-enrollments/careers-enrollments.module';
+import { AttendancesModule } from './attendances/attendances.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CareersEnrollmentsModule } from './careers-enrollments/careers-enrollme
     CareersLevelsModule,
     AcademicCyclesModule,
     CareersEnrollmentsModule,
+    AttendancesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
