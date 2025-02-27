@@ -16,4 +16,8 @@ export class CreateCourseDto {
   @IsNotEmpty({ message: 'El academicCycleId es requerido' })
   @IsInt({ message: 'El academicCycleId debe ser un entero' })
   academicCycleId: number;
+
+  @IsNotEmpty({ message: 'El careersLevelId es requerido' })
+  @IsInt({ message: 'El careersLevelId debe ser un entero' })
+  careersLevelId: number;
 }
