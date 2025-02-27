@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Career } from './entities/career.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CareersService {
-  create(createCareerDto: CreateCareerDto) {
-    return 'This action adds a new career';
+  constructor(
+    @InjectRepository(Career)
+    private readonly careerRepository: Repository<Career>,
+  ) {}
+
+  async create(createCareerDto: CreateCareerDto) {
+    const career = await this.careerRepository.findOne({
+      where: { name: createCareerDto.name },
+    });
+
+    if (career) {
+      throw new ConflictException({ message: 'Carrera ya existe' });
+    }
+
+    const newCareer = this.careerRepository.create(createCareerDto);
+    await this.careerRepository.save(newCareer);
+
+    return { message: 'Carrera creada', career: newCareer };
   }
 
-  findAll() {
-    return `This action returns all careers`;
+  async findAll() {
+    const [careers, total] = await this.careerRepository.findAndCount();
+    return { careers, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} career`;
+  async findOne(id: number) {
+    const career = await this.careerRepository.findOne({ where: { id } });
+    if (!career) {
+      throw new NotFoundException({ message: 'Carrera no encontrada' });
+    }
+    return career;
   }
 
-  update(id: number, updateCareerDto: UpdateCareerDto) {
-    return `This action updates a #${id} career`;
+  async update(id: number, updateCareerDto: UpdateCareerDto) {
+    const career = await this.findOne(id);
+    Object.assign(career, updateCareerDto);
+    await this.careerRepository.save(career);
+
+    return { message: 'Carrera actualizada' };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} career`;
+  async remove(id: number) {
+    const career = await this.findOne(id);
+    await this.careerRepository.remove(career);
+    return { message: 'Carrera eliminada' };
   }
 }
