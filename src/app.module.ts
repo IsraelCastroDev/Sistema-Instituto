@@ -7,6 +7,7 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfig } from './config/typeOrmConfig';
 import { CoursesModule } from './modules/courses/courses.module';
+import { CampusModule } from './modules/campus/campus.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CoursesModule } from './modules/courses/courses.module';
     UsersModule,
     AuthModule,
     CoursesModule,
+    CampusModule,
   ],
   controllers: [AppController],
   providers: [AppService],
