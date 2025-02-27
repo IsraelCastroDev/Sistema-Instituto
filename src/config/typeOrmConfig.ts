@@ -12,6 +12,6 @@ export const typeOrmConfig = (
   port: configService.get('DB_PORT'),
   host: configService.get('DB_HOST'),
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [join(__dirname + '../../**/*.{js,ts}')],
 });
