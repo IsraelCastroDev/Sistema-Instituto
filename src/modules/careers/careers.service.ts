@@ -8,6 +8,7 @@ import { UpdateCareerDto } from './dto/update-career.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Career } from './entities/career.entity';
 import { Repository } from 'typeorm';
+import { UpdateStatusCareerDto } from './dto/update-status-career.dto';
 
 @Injectable()
 export class CareersService {
@@ -50,6 +51,14 @@ export class CareersService {
     await this.careerRepository.save(career);
 
     return { message: 'Carrera actualizada' };
+  }
+
+  async updateStatus(id: number, updateStatusCareerDto: UpdateStatusCareerDto) {
+    const career = await this.findOne(id);
+    Object.assign(career, updateStatusCareerDto);
+    await this.careerRepository.save(career);
+
+    return { message: `Estado de la carrera ${career.name} actualizada` };
   }
 
   async remove(id: number) {
