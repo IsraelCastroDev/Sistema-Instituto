@@ -9,8 +9,11 @@ export class Campus {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
+  @Column({ type: 'varchar', length: 150 })
+  city: string;
+
   @Column({ type: 'varchar', length: 255 })
-  location: string;
+  address: string;
 
   @Column({ type: 'text' })
   description: string;

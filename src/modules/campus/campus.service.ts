@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCampusDto } from './dto/create-campus.dto';
 import { UpdateCampusDto } from './dto/update-campus.dto';
+import { Campus } from './entities/campus.entity';
 
 @Injectable()
 export class CampusService {
-  create(createCampusDto: CreateCampusDto) {
-    return 'This action adds a new campus';
+  constructor(
+    @InjectRepository(Campus)
+    private readonly campusRepository: Repository<Campus>,
+  ) {}
+
+  async create(createCampusDto: CreateCampusDto) {
+    const campus = this.campusRepository.create(createCampusDto);
+    await this.campusRepository.save(campus);
+    return { message: 'Campus creado correctamente' };
   }
 
   findAll() {
