@@ -16,6 +16,7 @@ import { AcademicCyclesModule } from './academic-cycles/academic-cycles.module';
 import { CareersEnrollmentsModule } from './careers-enrollments/careers-enrollments.module';
 import { AttendancesModule } from './attendances/attendances.module';
 import { SessionsModule } from './sessions/sessions.module';
+import { SchedulesModule } from './schedules/schedules.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { SessionsModule } from './sessions/sessions.module';
     CareersEnrollmentsModule,
     AttendancesModule,
     SessionsModule,
+    SchedulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
