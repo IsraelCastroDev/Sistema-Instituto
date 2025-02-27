@@ -1,6 +1,12 @@
 import { Campus } from 'src/modules/campus/entities/campus.entity';
 import { User } from 'src/modules/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('courses')
 export class Course {

@@ -14,11 +14,11 @@ export class CreateCampusDto {
   @IsString({ message: 'La ciudad debe ser una cadena de texto' })
   city: string;
 
-  @IsNotEmpty({ message: 'La ubicación es requerida' })
-  @IsString({ message: 'La ubicación debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'La dirección es requerida' })
+  @IsString({ message: 'La dirección debe ser una cadena de texto' })
   address: string;
 
-  @IsNotEmpty({ message: 'La descripción es requerida' })
+  @IsOptional()
   @IsString({ message: 'La descripción debe ser una cadena de texto' })
   description: string;
 

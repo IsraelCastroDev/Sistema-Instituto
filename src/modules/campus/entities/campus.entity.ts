@@ -1,5 +1,11 @@
 import { Course } from 'src/modules/courses/entities/course.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('campus')
 export class Campus {
@@ -15,12 +21,12 @@ export class Campus {
   @Column({ type: 'varchar', length: 255 })
   address: string;
 
-  @Column({ type: 'text' })
-  description: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToOne(() => Course, (course) => course.campus)
+  @OneToMany(() => Course, (course) => course.campus)
   courses: Course[];
 }
