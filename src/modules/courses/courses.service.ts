@@ -10,6 +10,7 @@ import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
 import { User } from '../users/entities/user.entity';
 import { Campus } from '../campus/entities/campus.entity';
+import { AuthRoles } from 'src/common/enums';
 
 @Injectable()
 export class CoursesService {
@@ -30,6 +31,12 @@ export class CoursesService {
       .catch(() => {
         throw new NotFoundException({ message: 'Usuario no encontrado' });
       });
+
+    if (user.role !== AuthRoles.TEACHER) {
+      throw new ConflictException({
+        message: 'El userId debe ser del rol profesor',
+      });
+    }
 
     const campus = await this.campusRepository
       .findOneOrFail({
