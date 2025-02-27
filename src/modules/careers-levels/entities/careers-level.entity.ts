@@ -6,9 +6,12 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity('careersLevel')
+@Unique(['name', 'careerId'])
+@Unique(['sequenceOrder', 'careerId'])
 export class CareersLevel {
   @PrimaryGeneratedColumn()
   id: number;
