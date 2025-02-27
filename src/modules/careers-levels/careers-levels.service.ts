@@ -55,19 +55,71 @@ export class CareersLevelsService {
     }
   }
 
-  findAll() {
-    return `This action returns all careersLevels`;
+  async findAll() {
+    const [careersLevels, total] =
+      await this.careersLevelRepository.findAndCount({
+        relations: ['career'],
+      });
+
+    return {
+      message: 'Niveles de carrera obtenidos exitosamente',
+      careersLevels,
+      total,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} careersLevel`;
+  async findOne(id: number) {
+    const careersLevel = await this.careersLevelRepository.findOne({
+      where: { id },
+      relations: ['career'],
+    });
+
+    if (!careersLevel) {
+      throw new NotFoundException('Nivel de carrera no encontrado');
+    }
+
+    return {
+      message: 'Nivel de carrera obtenido exitosamente',
+      careersLevel,
+    };
   }
 
-  update(id: number, updateCareersLevelDto: UpdateCareersLevelDto) {
-    return `This action updates a #${id} careersLevel`;
+  async update(id: number, updateCareersLevelDto: UpdateCareersLevelDto) {
+    const findCareersLevel = await this.findOne(id);
+    const { careersLevel } = findCareersLevel;
+
+    try {
+      Object.assign(careersLevel, updateCareersLevelDto);
+      await this.careersLevelRepository.save(careersLevel);
+      return {
+        message: 'Nivel de carrera actualizado exitosamente',
+        careersLevel,
+      };
+    } catch (error: unknown) {
+      if (error instanceof Error && 'code' in error) {
+        const pgError = error as { code: string; detail?: string };
+
+        if (pgError.code === '23505') {
+          const errorMessage = pgError.detail?.includes('name')
+            ? 'Ya existe un nivel con este nombre en la carrera'
+            : 'El orden de nivel ya está asignado en esta carrera';
+
+          throw new ConflictException(errorMessage);
+        }
+      }
+      throw error;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} careersLevel`;
+  async remove(id: number) {
+    const findCareersLevel = await this.findOne(id);
+    const { careersLevel } = findCareersLevel;
+
+    await this.careersLevelRepository.remove(careersLevel);
+
+    return {
+      message: 'Nivel de carrera eliminado exitosamente',
+      careersLevel,
+    };
   }
 }
