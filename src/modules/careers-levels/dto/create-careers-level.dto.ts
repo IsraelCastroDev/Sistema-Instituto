@@ -6,8 +6,8 @@ export class CreateCareersLevelDto {
   name: string;
 
   @IsNotEmpty({ message: 'El ID de la carrera es requerido' })
-  @IsString({ message: 'El ID de la carrera debe ser una cadena de texto' })
-  careerId: string;
+  @IsInt({ message: 'careerId debe ser un entero' })
+  careerId: number;
 
   @IsNotEmpty({ message: 'El orden de la carrera es requerido' })
   @IsInt({ message: 'sequenceOrder debe ser un entero' })
