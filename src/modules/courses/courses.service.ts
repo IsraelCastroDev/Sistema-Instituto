@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -11,6 +12,8 @@ import { Course } from './entities/course.entity';
 import { User } from '../users/entities/user.entity';
 import { Campus } from '../campus/entities/campus.entity';
 import { AuthRoles } from 'src/common/enums';
+import { CareersLevel } from '../careers-levels/entities/careers-level.entity';
+import { AcademicCycle } from '../academic-cycles/entities/academic-cycle.entity';
 
 @Injectable()
 export class CoursesService {
@@ -21,44 +24,54 @@ export class CoursesService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Campus)
     private readonly campusRepository: Repository<Campus>,
+    @InjectRepository(CareersLevel)
+    private readonly careersLevelRepository: Repository<CareersLevel>,
+    @InjectRepository(AcademicCycle)
+    private readonly academicCycleRepository: Repository<AcademicCycle>,
   ) {}
 
   async create(createCourseDto: CreateCourseDto) {
-    const { userId, campusId, name } = createCourseDto;
+    const { userId, campusId, careersLevelId, academicCycleId, name } =
+      createCourseDto;
 
-    const user = await this.userRepository
-      .findOneOrFail({ where: { id: userId } })
-      .catch(() => {
-        throw new NotFoundException({ message: 'Usuario no encontrado' });
+    const [user, campus, careersLevel, academicCycle] = await Promise.all([
+      this.userRepository.findOne({ where: { id: userId } }),
+      this.campusRepository.findOne({ where: { id: campusId } }),
+      this.careersLevelRepository.findOne({ where: { id: careersLevelId } }),
+      this.academicCycleRepository.findOne({ where: { id: academicCycleId } }),
+    ]);
+
+    if (!user)
+      throw new NotFoundException({ message: 'Usuario no encontrado' });
+    if (!campus)
+      throw new NotFoundException({ message: 'Campus no encontrado' });
+    if (!careersLevel)
+      throw new NotFoundException({
+        message: 'Nivel de carrera no encontrado',
       });
+    if (!academicCycle)
+      throw new NotFoundException({ message: 'Ciclo académico no encontrado' });
 
     if (user.role !== AuthRoles.TEACHER) {
-      throw new ConflictException({
-        message: 'El userId debe ser del rol profesor',
-      });
+      throw new ForbiddenException('El userId debe ser del rol profesor');
     }
 
-    const campus = await this.campusRepository
-      .findOneOrFail({
-        where: { id: campusId },
-      })
-      .catch(() => {
-        throw new NotFoundException({ message: 'Campus no encontrado' });
-      });
-
     const courseExists = await this.courseRepository.findOne({
-      where: { campusId, userId, name },
+      where: { name, campusId, userId, academicCycleId },
     });
 
     if (courseExists) {
-      throw new ConflictException({ message: 'Curso ya registrado' });
+      throw new ConflictException('Curso ya registrado');
     }
 
     const course = this.courseRepository.create({
       ...createCourseDto,
       user,
       campus,
+      careersLevel,
+      academicCycle,
     });
+
     await this.courseRepository.save(course);
 
     return { message: 'Curso registrado exitosamente', course };
