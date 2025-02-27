@@ -1,5 +1,6 @@
 import { AuthRoles } from 'src/common/enums';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Course } from 'src/modules/courses/entities/course.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -29,4 +30,7 @@ export class User {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @OneToMany(() => Course, (course) => course.user, { cascade: true })
+  courses: Course[];
 }
