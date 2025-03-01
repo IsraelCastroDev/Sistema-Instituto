@@ -7,7 +7,7 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
-import { AuthRoles } from 'src/common/enums';
+import { AuthRoles } from 'common/enums';
 
 export class CreateUserDto {
   @IsNotEmpty({ message: 'El nombre es requerido' })

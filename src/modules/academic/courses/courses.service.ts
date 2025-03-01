@@ -9,11 +9,11 @@ import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
-import { AuthRoles } from 'src/common/enums';
+import { AuthRoles } from 'common/enums';
 import { AcademicCycle } from '../academic-cycles/entities/academic-cycle.entity';
-import { User } from 'src/modules/user/users/entities/user.entity';
-import { Campus } from 'src/modules/campus/entities/campus.entity';
-import { CareersLevel } from 'src/modules/career/careers-levels/entities/careers-level.entity';
+import { User } from 'modules/user/users/entities/user.entity';
+import { Campus } from 'modules/campus/entities/campus.entity';
+import { CareersLevel } from 'modules/career/careers-levels/entities/careers-level.entity';
 
 @Injectable()
 export class CoursesService {

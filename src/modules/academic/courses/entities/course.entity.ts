@@ -1,5 +1,3 @@
-import { Campus } from 'src/modules/campus/entities/campus.entity';
-import { User } from 'src/modules/user/users/entities/user.entity';
 import {
   Column,
   Entity,
@@ -9,8 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AcademicCycle } from '../../academic-cycles/entities/academic-cycle.entity';
-import { CareersLevel } from 'src/modules/career/careers-levels/entities/careers-level.entity';
 import { Session } from '../../sessions/entities/session.entity';
+import { User } from 'modules/user/users/entities/user.entity';
+import { Campus } from 'modules/campus/entities/campus.entity';
+import { CareersLevel } from 'modules/career/careers-levels/entities/careers-level.entity';
 
 @Entity('courses')
 export class Course {

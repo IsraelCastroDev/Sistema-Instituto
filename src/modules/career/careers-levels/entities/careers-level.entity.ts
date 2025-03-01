@@ -1,3 +1,5 @@
+import { Course } from 'modules/academic/courses/entities/course.entity';
+import { Career } from 'modules/career/careers/entities/career.entity';
 import {
   Column,
   Entity,
@@ -6,8 +8,6 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Career } from '../../careers/entities/career.entity';
-import { Course } from 'src/modules/academic/courses/entities/course.entity';
 
 @Entity('careersLevel')
 @Unique(['name', 'careerId'])

@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { hashPassword } from 'src/common/helpers/user';
+import { hashPassword } from 'common/helpers/user';
 
 @Injectable()
 export class UsersService {

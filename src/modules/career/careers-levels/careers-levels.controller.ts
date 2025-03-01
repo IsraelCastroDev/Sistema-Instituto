@@ -10,7 +10,7 @@ import {
 import { CareersLevelsService } from './careers-levels.service';
 import { CreateCareersLevelDto } from './dto/create-careers-level.dto';
 import { UpdateCareersLevelDto } from './dto/update-careers-level.dto';
-import { IdValidationPipe } from 'src/common/pipes/id-validation/id-validation.pipe';
+import { IdValidationPipe } from 'common/pipes/id-validation/id-validation.pipe';
 
 @Controller('careers-levels')
 export class CareersLevelsController {

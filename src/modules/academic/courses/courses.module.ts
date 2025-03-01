@@ -4,9 +4,9 @@ import { CoursesController } from './courses.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './entities/course.entity';
 import { AcademicCycle } from '../academic-cycles/entities/academic-cycle.entity';
-import { User } from 'src/modules/user/users/entities/user.entity';
-import { Campus } from 'src/modules/campus/entities/campus.entity';
-import { CareersLevel } from 'src/modules/career/careers-levels/entities/careers-level.entity';
+import { User } from 'modules/user/users/entities/user.entity';
+import { Campus } from 'modules/campus/entities/campus.entity';
+import { CareersLevel } from 'modules/career/careers-levels/entities/careers-level.entity';
 
 @Module({
   imports: [

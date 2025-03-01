@@ -1,5 +1,5 @@
-import { AuthRoles } from 'src/common/enums';
-import { Course } from 'src/modules/academic/courses/entities/course.entity';
+import { AuthRoles } from 'common/enums';
+import { Course } from 'modules/academic/courses/entities/course.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')

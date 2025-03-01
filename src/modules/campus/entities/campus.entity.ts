@@ -1,4 +1,4 @@
-import { Course } from 'src/modules/academic/courses/entities/course.entity';
+import { Course } from 'modules/academic/courses/entities/course.entity';
 import {
   Column,
   Entity,
