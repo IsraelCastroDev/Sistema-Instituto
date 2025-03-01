@@ -17,6 +17,7 @@ import { CareersEnrollmentsModule } from './modules/career/careers-enrollments/c
 import { AttendancesModule } from './modules/user/attendances/attendances.module';
 import { SessionsModule } from './modules/academic/sessions/sessions.module';
 import { SchedulesModule } from './modules/academic/schedules/schedules.module';
+import { AttendancesModule } from './modules/academic/attendances/attendances.module';
 
 @Module({
   imports: [
