@@ -15,9 +15,7 @@ export class SessionsService {
   ) {}
 
   async create(createSessionDto: CreateSessionDto) {
-    const findCourse = await this.courseService.findOne(
-      createSessionDto.courseId,
-    );
+    const course = await this.courseService.findOne(createSessionDto.courseId);
     return 'This action adds a new session';
   }
 
