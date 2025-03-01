@@ -4,19 +4,19 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { typeOrmConfig } from './config/typeOrmConfig';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { CoursesModule } from './modules/courses/courses.module';
+import { UsersModule } from './modules/user/users/users.module';
+import { AuthModule } from './modules/user/auth/auth.module';
+import { CoursesModule } from './modules/academic/courses/courses.module';
 import { CampusModule } from './modules/campus/campus.module';
-import { EnrollmentsModule } from './modules/enrollments/enrollments.module';
+import { EnrollmentsModule } from './modules/user/enrollments/enrollments.module';
 import { EnrollmentsCoursesModule } from './modules/enrollments-courses/enrollments-courses.module';
-import { CareersModule } from './modules/careers/careers.module';
-import { CareersLevelsModule } from './modules/careers-levels/careers-levels.module';
-import { AcademicCyclesModule } from './modules/academic-cycles/academic-cycles.module';
-import { CareersEnrollmentsModule } from './modules/careers-enrollments/careers-enrollments.module';
-import { AttendancesModule } from './modules/attendances/attendances.module';
-import { SessionsModule } from './modules/sessions/sessions.module';
-import { SchedulesModule } from './modules/schedules/schedules.module';
+import { CareersModule } from './modules/career/careers/careers.module';
+import { CareersLevelsModule } from './modules/career/careers-levels/careers-levels.module';
+import { AcademicCyclesModule } from './modules/academic/academic-cycles/academic-cycles.module';
+import { CareersEnrollmentsModule } from './modules/career/careers-enrollments/careers-enrollments.module';
+import { AttendancesModule } from './modules/user/attendances/attendances.module';
+import { SessionsModule } from './modules/academic/sessions/sessions.module';
+import { SchedulesModule } from './modules/academic/schedules/schedules.module';
 
 @Module({
   imports: [

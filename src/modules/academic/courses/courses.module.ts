@@ -3,10 +3,10 @@ import { CoursesService } from './courses.service';
 import { CoursesController } from './courses.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './entities/course.entity';
-import { User } from '../users/entities/user.entity';
-import { Campus } from '../campus/entities/campus.entity';
-import { CareersLevel } from '../careers-levels/entities/careers-level.entity';
 import { AcademicCycle } from '../academic-cycles/entities/academic-cycle.entity';
+import { User } from 'src/modules/user/users/entities/user.entity';
+import { Campus } from 'src/modules/campus/entities/campus.entity';
+import { CareersLevel } from 'src/modules/career/careers-levels/entities/careers-level.entity';
 
 @Module({
   imports: [

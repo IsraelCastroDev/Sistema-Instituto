@@ -1,5 +1,5 @@
-import { Course } from 'src/modules/courses/entities/course.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Course } from '../../courses/entities/course.entity';
 
 @Entity('sessions')
 export class Session {

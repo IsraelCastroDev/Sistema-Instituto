@@ -1,5 +1,5 @@
-import { CareersLevel } from 'src/modules/careers-levels/entities/careers-level.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CareersLevel } from '../../careers-levels/entities/careers-level.entity';
 
 @Entity('careers')
 export class Career {
