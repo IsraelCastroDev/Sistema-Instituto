@@ -81,8 +81,12 @@ export class CoursesService {
     return `This action returns all courses`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findOne(id: number) {
+    const course = await this.courseRepository.findOne({ where: { id } });
+    if (!course) {
+      throw new NotFoundException('Curso no encontrado');
+    }
+    return course;
   }
 
   update(id: number, updateCourseDto: UpdateCourseDto) {
