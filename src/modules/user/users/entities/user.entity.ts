@@ -1,4 +1,5 @@
 import { AuthRoles } from 'common/enums';
+import { Attendance } from 'modules/academic/attendances/entities/attendance.entity';
 import { Course } from 'modules/academic/courses/entities/course.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -33,4 +34,7 @@ export class User {
 
   @OneToMany(() => Course, (course) => course.user, { cascade: true })
   courses: Course[];
+
+  @OneToMany(() => Attendance, (attendance) => attendance.user)
+  attendances: Attendance[];
 }

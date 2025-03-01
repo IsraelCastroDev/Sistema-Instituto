@@ -1,5 +1,12 @@
+import { Attendance } from 'modules/academic/attendances/entities/attendance.entity';
 import { Course } from 'modules/academic/courses/entities/course.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('sessions')
 export class Session {
@@ -23,6 +30,9 @@ export class Session {
 
   @Column({ type: 'number' })
   courseId: number;
+
+  @OneToMany(() => Attendance, (attendance) => attendance.session)
+  attendances: Attendance[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
