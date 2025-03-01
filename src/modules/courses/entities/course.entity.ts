@@ -1,6 +1,7 @@
 import { AcademicCycle } from 'src/modules/academic-cycles/entities/academic-cycle.entity';
 import { Campus } from 'src/modules/campus/entities/campus.entity';
 import { CareersLevel } from 'src/modules/careers-levels/entities/careers-level.entity';
+import { Session } from 'src/modules/sessions/entities/session.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
@@ -43,4 +44,7 @@ export class Course {
 
   @Column({ type: 'int' })
   careersLevelId: number;
+
+  @OneToMany(() => Session, (session) => session.course)
+  sessions: Session[];
 }
