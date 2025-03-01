@@ -20,5 +20,6 @@ import { AcademicCycle } from '../academic-cycles/entities/academic-cycle.entity
   ],
   controllers: [CoursesController],
   providers: [CoursesService],
+  exports: [CoursesService],
 })
 export class CoursesModule {}
