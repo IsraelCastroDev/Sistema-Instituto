@@ -1,4 +1,5 @@
 import { Course } from 'modules/academic/courses/entities/course.entity';
+import { Schedule } from 'modules/academic/schedules/entities/schedule.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('academicsCycles')
@@ -23,4 +24,7 @@ export class AcademicCycle {
 
   @OneToMany(() => Course, (course) => course.academicCycle)
   courses: Course[];
+
+  @OneToMany(() => Schedule, (schedule) => schedule.academicCycle)
+  schedules: Schedule[];
 }

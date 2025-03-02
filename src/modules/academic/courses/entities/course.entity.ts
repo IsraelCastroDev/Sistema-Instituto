@@ -11,6 +11,7 @@ import { Session } from '../../sessions/entities/session.entity';
 import { User } from 'modules/user/users/entities/user.entity';
 import { Campus } from 'modules/campus/entities/campus.entity';
 import { CareersLevel } from 'modules/career/careers-levels/entities/careers-level.entity';
+import { Schedule } from 'modules/academic/schedules/entities/schedule.entity';
 
 @Entity('courses')
 export class Course {
@@ -47,4 +48,7 @@ export class Course {
 
   @OneToMany(() => Session, (session) => session.course)
   sessions: Session[];
+
+  @OneToMany(() => Schedule, (schedule) => schedule.course)
+  schedules: Schedule[];
 }
