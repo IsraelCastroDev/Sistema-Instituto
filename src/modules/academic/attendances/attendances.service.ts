@@ -36,6 +36,7 @@ export class AttendancesService {
       throw new ConflictException('El estudiante ya marcó su asistencia');
     }
 
+    // verificando si el estudiante esta en tardanza
     const currentTime = new Date();
     const sessionStartDate = new Date(
       `${session.sessionDate}T${session.startTime}`,
