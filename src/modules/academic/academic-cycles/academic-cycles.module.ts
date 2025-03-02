@@ -8,5 +8,6 @@ import { AcademicCycle } from './entities/academic-cycle.entity';
   imports: [TypeOrmModule.forFeature([AcademicCycle])],
   controllers: [AcademicCyclesController],
   providers: [AcademicCyclesService],
+  exports: [AcademicCyclesService],
 })
 export class AcademicCyclesModule {}
