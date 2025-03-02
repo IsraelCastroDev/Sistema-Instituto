@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCampusDto } from './dto/create-campus.dto';
@@ -22,8 +22,12 @@ export class CampusService {
     return `This action returns all campus`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} campus`;
+  async findOne(id: number) {
+    const campus = await this.campusRepository.findOne({ where: { id } });
+    if (!campus) {
+      throw new NotFoundException(`Campus con id ${id} no encontrado`);
+    }
+    return campus;
   }
 
   update(id: number, updateCampusDto: UpdateCampusDto) {
