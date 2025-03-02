@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateAcademicCycleDto } from './dto/create-academic-cycle.dto';
 import { UpdateAcademicCycleDto } from './dto/update-academic-cycle.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -50,8 +54,15 @@ export class AcademicCyclesService {
     return `This action returns all academicCycles`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} academicCycle`;
+  async findOne(id: number) {
+    const academicCycle = await this.academicCycleRepository.findOne({
+      where: { id },
+    });
+    if (!academicCycle) {
+      throw new NotFoundException(`Ciclo académico con id ${id} no encontrado`);
+    }
+
+    return academicCycle;
   }
 
   update(id: number, updateAcademicCycleDto: UpdateAcademicCycleDto) {
